@@ -14,22 +14,17 @@
     </div>
 
     <div class="form-group">
-        {!! Form::open(['url' => route('photos.store'), 'method' => 'POST']) !!}
+        {!! Form::open(['url' => route('article.store'), 'files' => true, ]) !!}
         {!! Form::label('profile_picture', 'Profile picture') !!}
         {!! Form::file('profile_picture', null, ['class' => 'form-control']) !!}
-
-
     </div>
 
 
 
     <div class="form-group">
-        {!! Form::open(['url' => route('photos.store'), 'method' => 'POST']) !!}
-
+        {!! Form::open(['url' => route('article.store'), 'files' => true, ]) !!}
         {!! Form::label('additional_photos', 'Additional photos') !!}
         {!! Form::file('additional_photos', null, ['class' => 'form-control']) !!}
-
-
 
     </div>
 

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\Photo;
 use App\Requests\ArticleRequest;
+
 
 
 class ArticleController extends Controller
@@ -25,7 +27,6 @@ class ArticleController extends Controller
     {
         $article->update($request->all());
 
-        return redirect(route('article.index'));
     }
 
     public function create()
@@ -33,11 +34,28 @@ class ArticleController extends Controller
         return view('admin.article.create');
     }
 
-    public function store(ArticleRequest $request)
+    /**
+     * @param ArticleRequest $request
+     * @param Article $images
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(ArticleRequest $request, Article $images)
     {
         Article::create($request->all());
 
-        return redirect(route('article.index'));
+        $images->update($request->all());
+        request()->validate([
+            'profile_picture' => 'required|image|',
+            'additional_photos' => 'required|image'
+        ]);
+
+        $input = time().'.'.request()->image->getClientOriginalExtension();
+        request()->image->move(public_path('images'), $input);
+
+        return back()
+            ->with('success','You have successfully upload image.')
+            ->with('image',$input)
+            ->with(redirect(route('article.index')));
     }
 
 

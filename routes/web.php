@@ -1,6 +1,6 @@
 <?php
 
-/*
+/*php
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -11,8 +11,23 @@
 |
 */
 Route::get('/', function () {
-    return view('register');
+    $gallery = \App\Gallery::get();
+    $add_cars = \App\add_cars::get();
+    return view('home/index')->with('gallery', $gallery)
+                                    ->with('add_cars', $add_cars);
 });
+Route::get('/our_fleet', function () {
+    $add_cars = \App\add_cars::get();
+    return view('home/our_fleet')->with('add_cars', $add_cars);
+});
+
+Route::get('/single-car', function () {
+    $add_cars = \App\add_cars::get();
+    return view('home/single-car')->with('add_cars', $add_cars);
+});
+
+Route::get('/contact', 'Home\HomeController@contact');
+//Route::get('/single-car', 'Home\HomeController@single_car');
 
 Route::get('admin/login', 'Admin\Auth\LoginController@showLoginForm');
 Route::post('admin/login', 'Admin\Auth\LoginController@login');
