@@ -4,9 +4,8 @@
 <script src="js/bootstrap.min.js"></script>
 
 <style>
-.slider-img-top{
+.d-block{
 max-height: 35vh;
-min-width: 180vh;
 }
 
 </style>
@@ -19,8 +18,8 @@ min-width: 180vh;
     <div class="carousel-inner" role="listbox">
 
         @for ($i = 0; $i < sizeOf($gallery); $i++)
-            <div class="item @if($i ==0) active @endif">
-                <img class="slider-img-top" src="uploads/{{ $gallery[$i]->image }}" alt="{{ $gallery[$i]->title }} ">
+            <div class="item @if($i == 0) active @endif">
+                <img class="d-block w-100" src="uploads/{{ $gallery[$i]->image }}" alt="{{ $gallery[$i]->title }} ">
                 <div class="carousel-caption">
                     {{--<h3>{{ $gallery[$i]->title }}</h3>--}}
                     {{--<p>{{ $gallery[$i]->subtitle }}</p>--}}
