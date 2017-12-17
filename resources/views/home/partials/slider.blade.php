@@ -6,6 +6,7 @@
 <style>
 .d-block{
 max-height: 35vh;
+    
 }
 
 </style>
